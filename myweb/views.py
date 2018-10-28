@@ -9,6 +9,7 @@ def home(request):
     blog_content_type = ContentType.objects.get_for_model(Blog)
 
     context = {}
+    context['blog_list'] = Blog.objects.all()[:7]
     context['blog_nums'] = Blog.objects.all().count()
     context['today_hot_blog'] = today_hot_data(blog_content_type)
     context['week_hot_blog'] = week_hot_data()

@@ -5,6 +5,7 @@ from django.db.models import Sum
 from .models import ReadNum, ReadDetail
 from blog.models import Blog
 
+
 def read_once_time(request, obj):
     ct = ContentType.objects.get_for_model(obj)
     key = '%s_%s_read' % (ct.model, obj.pk)
