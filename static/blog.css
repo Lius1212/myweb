@@ -1,0 +1,17 @@
+div h3{
+    margin-top: 10px;
+}
+div.blog_content{
+    margin-top: 0.5em;
+}
+div.blog_content:not(:last-child){
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 1.5em;
+}
+
+div.page-foot{
+    text-align: center;
+    margin-right: 25em;
+
+}
+

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}刘爽的个人博客|主页{% endblock %}
+{% block head_expends %}{% endblock %}
+{% block home_active %}active{% endblock %}
+{% block bs_head_expend %}
+    <div class="bs_header_content">
+        <h1>无所事事</h1>
+        <p>只是一个平凡人的学习记录</p>
+    </div>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="hot_data">
+            <div class="block-title">本站一共{{ blog_nums }}篇博客</div>
+            <div class="row">
+                <div class="col-md-4"><ul>
+                    <h3>分类排行 </h3>
+                    {% for blog_type in blog_types_sequence %}
+                        <li><a href="{% url 'blog_with_type' blog_type.pk %}">
+                            {{ blog_type.type_name }}({{ blog_type.blog_count }})</a></li>
+                    {% endfor %}</ul>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+
+
+        <div class="hot_data">
+            <div class="block-title">
+                阅读热榜 <span class="glyphicon glyphicon-fire"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><ul>
+                    <h3>今日热门阅读</h3>
+                    {% for hot_blog in today_hot_blog %}
+                        <li><a href="{% url 'blog_detail' hot_blog.content_object.pk %}">
+                            {{ hot_blog.content_object.title }}({{ hot_blog.read_num }})</a></li>
+                    {% endfor %}</ul>
+                </div>
+                <div class="col-md-4"><ul>
+                    <h3>本周热门阅读</h3>
+                    {% for hot_blog in week_hot_blog %}
+                        <li><a href="{% url 'blog_detail' hot_blog.id %}">
+                            {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
+                    {% endfor %}</ul>
+                </div>
+                <div class="col-md-4"><ul>
+                    <h3>近三十日热门阅读</h3>
+                    {% for hot_blog in month_hot_blog %}
+                        <li><a href="{% url 'blog_detail' hot_blog.id %}">
+                            {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
+                    {% endfor %}</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
