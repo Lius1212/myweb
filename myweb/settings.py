@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'blog',
     'read_record',
-    'user'
+    'user',
+    'comment',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,25 @@ STATICFILES_DIRS = [
 
 # 配置ckeditor
 CKEDITOR_UPLOAD_PATH = 'upload/'
+
+CKEDITOR_CONFIGS = {
+    'default': {},
+    'comment_ckeditor': {
+        'toolbar': 'custom',
+        'toolbar_custom': [
+            ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+            ['TextColor', 'BGColor', 'RemoveFormat'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'UnLink'],
+            ['Smiley', 'SpecialChar', 'Blockquote'],
+        ],
+        'width': '100%',
+        'height': '180',
+        'tabSpace': 4,
+        'removePlugins': 'elementspath',
+        'resize_enabled': False
+    },
+}
 
 # 配置media储存文件用
 MEDIA_URL = '/media/'
