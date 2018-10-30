@@ -12,7 +12,11 @@ div.page-foot{
     text-align: center;
     margin-right: 25em;
 }
-div.one-comment:not(:last-child){
+div.one-comment{
+    border-bottom: 1px dashed #ccc;
+}
+div.one-reply{
+    margin-left: 5em;
     border-bottom: 1px dashed #ccc;
 }
 div.django-ckeditor-widget{

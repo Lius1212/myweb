@@ -24,7 +24,10 @@
                     <h3>博客列表 </h3>
                     {% for blog in blog_list %}
                         <li><a href="{% url 'blog_detail' blog.id %}">
-                            {{ blog.title }}({{ blog.get_read_num }})</a></li>
+                            {{ blog.title }}
+                            {% if blog.get_read_num > 5 %}
+                                <span class="text-danger glyphicon glyphicon-fire"></span>
+                            {% endif %}</a></li>
                     {% endfor %}</ul>
                 </div>
                 <div class="col-md-4"></div>
@@ -34,7 +37,7 @@
 
         <div class="hot_data">
             <div class="block-title">
-                阅读热榜 <span class="glyphicon glyphicon-fire"></span>
+                阅读热榜 <span class="text-danger glyphicon glyphicon-fire"></span>
             </div>
             <div class="row">
                 <div class="col-md-4"><ul>

@@ -10,6 +10,12 @@ def create_comment(request):
         comment.commentator = comment_form.cleaned_data['user']
         comment.content = comment_form.cleaned_data['content']
         comment.content_object = comment_form.cleaned_data['content_object']
+        parent = comment_form.cleaned_data['parent']
+        if parent:
+            comment.root = parent.root if parent.root else parent
+            comment.parent = parent
+            comment.reply_to = parent.commentator
+
         comment.save()
 
     return redirect(request.GET.get('from', reverse('home')))

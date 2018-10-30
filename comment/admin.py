@@ -4,4 +4,4 @@ from .models import Comment
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('content_object', 'content_type', 'object_id', 'content', 'commentator', 'created_time')
+    list_display = ('content_object', 'id', 'content', 'commentator', 'created_time')

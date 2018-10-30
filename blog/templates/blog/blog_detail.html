@@ -14,13 +14,19 @@
             <div class="col-md-11">
                 <div class="panel panel-primary">
                     <div class="panel-footer">
-                    <h3>{{ blog.title }}</h3>
+                    <h3>
+                        {{ blog.title }}
+                        {% if blog.get_read_num > 5 %}
+                            <span class="text-danger glyphicon glyphicon-fire"></span>
+                        {% endif %}
+                    </h3>
                     </div>
                     <div class="panel-body">
                         <span>作者：{{ blog.author }}</span>
                         <span>分类：<a href="{% url 'blog_with_type' blog_type.pk %}">{{ blog.blog_type }}</a></span>
                         <span>创建时间：{{ blog.created_time|date:'Y-m-d' }}</span>
                         <span>阅读数量({{ blog.get_read_num }})</span>
+                        <span>评论数量({% get_comments_num blog %})</span>
                         <p>{{ blog.content|safe}}</p>
                     </div>
                 </div>
@@ -43,14 +49,19 @@
                     </div>
                     <div class="panel-body">
                         {% if user.is_authenticated %}
-                            <h4>{{ user.username }} 欢迎评论~~~</h4>
                             <form id="comment_form" action="{% url 'create_comment' %}?from={{ request.get_full_path }}" method="post" >
+                                <h4>{{ user.username }} 欢迎评论~~~</h4>
+                                <div id="reply_content_container" style="display: none">
+                                    <div>回复：</div>
+                                    <div id="reply_content"></div>
+                                </div>
                                 {% csrf_token %}
                                 {% get_comment_form  blog as comment_form %}
                                 {% for field in comment_form %}
                                     {{ field }}
                                 {% endfor %}
-                            <input type="submit" value="提交评论" class="btn btn-primary pull-right">
+                            <span id="comment_error" class="text-danger pull-left"></span>
+                            <input type="submit" id="submit-comment-button" value="提交评论" class="btn btn-primary pull-right">
                             </form>
                         {% else %}
                             <span>尚未登录，登录后可发起评论~~~</span>
@@ -72,10 +83,22 @@
                                 <div><h4>{{ comment.commentator }}</h4></div>
                                 <div>created at {{ comment.created_time }}</div>
                                 <br>
-                                <div>{{ comment.content|safe }}</div>
+                                <div id="comment_{{ comment.pk }}">{{ comment|safe }}</div>
+                                <br>
+                                <a href="javascript:reply({{ comment.pk }});">回复</a>
                             </div>
+                            {% for reply in comment.root_comments.all %}
+                                <div class="one-reply">
+                                    <div><h4>{{ reply.commentator }} 回复 {{ reply.reply_to }}</h4></div>
+                                    <div>created at {{ reply.created_time }}</div>
+                                    <br>
+                                    <div id="comment_{{ reply.pk }}">{{ reply|safe }}</div>
+                                    <br>
+                                    <a href="javascript:reply({{ reply.pk }});">回复</a>
+                                </div>
+                            {% endfor %}
                         {% empty %}
-                            <div>暂未评论</div>
+                            <div>暂无评论</div>
                         {% endfor %}
                     </div>
                 </div>
@@ -83,4 +106,22 @@
             <div class="col-md-1"></div>
         </div>
     </div>
+{% endblock %}
+
+{% block script_extend %}
+    <script type="text/javascript">
+        function reply(reply_comment_id) {
+            $("#reply_comment_id").val(reply_comment_id);
+            var html = $("#comment_" + reply_comment_id).html();
+            $('#reply_content').html(html);
+            $('#reply_content_container').show();
+            $('html').animate({scrollTop: $('#comment_form').offset().top - 150})
+                CKEDITOR.instances['id_content'].focus();
+        }
+        $("#comment_form").submit(function() {
+            if (CKEDITOR.instances["id_content"].document.getBody().getText().trim() === '') {
+                $("#comment_error").text('评论内容不能为空');
+                return false;
+            }})
+    </script>
 {% endblock %}
