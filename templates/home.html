@@ -20,20 +20,19 @@
                             {{ blog_type.type_name }}({{ blog_type.blog_count }})</a></li>
                     {% endfor %}</ul>
                 </div>
-                <div class="col-md-4"><ul>
+                <div class="col-md-8"><ul>
                     <h3>博客列表 </h3>
                     {% for blog in blog_list %}
                         <li><a href="{% url 'blog_detail' blog.id %}">
-                            {{ blog.title }}
+                            {{ blog.title }}({{ blog.blog_type }})
                             {% if blog.get_read_num > 5 %}
                                 <span class="text-danger glyphicon glyphicon-fire"></span>
                             {% endif %}</a></li>
                     {% endfor %}</ul>
                 </div>
-                <div class="col-md-4"></div>
+
             </div>
         </div>
-
 
         <div class="hot_data">
             <div class="block-title">

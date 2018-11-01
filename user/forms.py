@@ -80,3 +80,26 @@ class ChangePasswordForm(forms.Form):
             raise forms.ValidationError('原密码输入错误')
         else:
             return old_password
+
+
+class ChangeAvatarForm(forms.Form):
+    avatar = forms.FileField(label='')
+
+    def __init__(self, *args, **kwargs):
+        if 'user' in kwargs:
+            self.user = kwargs.pop('user')
+        super(ChangeAvatarForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        if self.user:
+            self.cleaned_data['user'] = self.user
+        return self.cleaned_data
+
+    def clean_avatar(self):
+        avatar = self.cleaned_data['avatar']
+        if avatar.size > 2 * 2 ** 20:         # > 2mb
+            raise forms.ValidationError('上传头像文件过大')
+        for suffix in ['.jpg', '.png', '.bmp', '.jpeg']:        # judge format
+            if suffix in avatar.name:
+                return avatar
+        raise forms.ValidationError('上传头像格式错误')

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load comment_tags %}
+{% load user_tags %}
 {% block title %}{{ blog.title }}{% endblock %}
 {% block head_expends %}
     {% load staticfiles %}
@@ -22,7 +23,7 @@
                     </h3>
                     </div>
                     <div class="panel-body">
-                        <span>作者：{{ blog.author }}</span>
+                        <span>作者：{% get_nickname_or_username blog.author %}</span>
                         <span>分类：<a href="{% url 'blog_with_type' blog_type.pk %}">{{ blog.blog_type }}</a></span>
                         <span>创建时间：{{ blog.created_time|date:'Y-m-d' }}</span>
                         <span>阅读数量({{ blog.get_read_num }})</span>
@@ -50,7 +51,7 @@
                     <div class="panel-body">
                         {% if user.is_authenticated %}
                             <form id="comment_form" action="{% url 'create_comment' %}?from={{ request.get_full_path }}" method="post" >
-                                <h4>{{ user.username }} 欢迎评论~~~</h4>
+                                <h4>{% get_nickname_or_username user %} 欢迎评论~~~</h4>
                                 <div id="reply_content_container" style="display: none">
                                     <div>回复：</div>
                                     <div id="reply_content"></div>
@@ -80,7 +81,7 @@
                         {% get_comments_list blog as comments %}
                         {% for  comment in comments %}
                             <div class="one-comment">
-                                <div><h4>{{ comment.commentator }}</h4></div>
+                                <div><h4>{% get_nickname_or_username comment.commentator %}</h4></div>
                                 <div>created at {{ comment.created_time }}</div>
                                 <br>
                                 <div id="comment_{{ comment.pk }}">{{ comment|safe }}</div>
@@ -89,7 +90,7 @@
                             </div>
                             {% for reply in comment.root_comments.all %}
                                 <div class="one-reply">
-                                    <div><h4>{{ reply.commentator }} 回复 {{ reply.reply_to }}</h4></div>
+                                    <div><h4>{% get_nickname_or_username reply.commentator %} 回复 {% get_nickname_or_username reply.reply_to %}</h4></div>
                                     <div>created at {{ reply.created_time }}</div>
                                     <br>
                                     <div id="comment_{{ reply.pk }}">{{ reply|safe }}</div>
