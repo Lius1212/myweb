@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import Blog, BlogType
 from read_record.utils import read_once_time
+from .models import Blog, BlogType
 
 
 def blog_detail(request, blog_pk):
@@ -60,3 +60,14 @@ def blog_with_date(request, year, month):
     context = get_blog_list_common(request, blog_all_list)
     context['blogs_with_date'] = '{0}年{1}月'.format(year, month)
     return render(request, 'blog/blog_with_date.html', context)
+
+
+def blog_search(request):
+    if request.method == 'GET':
+        keyword = request.GET.get('keyword', '').strip()
+        blog_all_list = Blog.objects.filter(title__contains=keyword)
+        context = get_blog_list_common(request, blog_all_list)
+        context['keyword'] = keyword
+        return render(request, 'blog/blog_search.html', context)
+    else:
+        return redirect(request.GET.get('from', reverse('home')))

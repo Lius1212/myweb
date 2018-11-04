@@ -17,5 +17,4 @@ def create_comment(request):
             comment.reply_to = parent.commentator
 
         comment.save()
-
     return redirect(request.GET.get('from', reverse('home')))
