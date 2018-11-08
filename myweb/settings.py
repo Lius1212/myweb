@@ -131,6 +131,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 
+EACH_PAGE_NUMBER = 7
+
 # 配置ckeditor
 CKEDITOR_UPLOAD_PATH = 'upload/'
 

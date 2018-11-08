@@ -9,6 +9,7 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'base.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
     {% block head_expends %}{% endblock %}
 </head>
 <body>
@@ -37,7 +38,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% get_nickname_or_username user %}&nbsp;&nbsp;<img src="{{ user.profile.avatar.url }}" alt="个人头像" width="25" height="25">&nbsp;&nbsp;<span class="caret"></span>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% get_nickname_or_username user %}&nbsp;&nbsp;<img src="{{ user.profile.avatar.url }}" alt="" width="25" height="25">&nbsp;&nbsp;<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url 'user_info' %}">个人信息</a></li>

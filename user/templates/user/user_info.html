@@ -11,7 +11,7 @@
             {% if user.is_authenticated %}
                 <div class="jumbotron">
                     <h1>Hello, <span id="greet-old-nickname">{% get_nickname_or_username user %}</span>!&nbsp;</h1>
-                    <span id="avatar-container"><img src="{{ user.profile.avatar.url }}" alt="个人头像" width="120" height="120"></span>
+                    <span id="avatar-container"><img id="avatar-set" src="{{ user.profile.avatar.url }}" alt="" width="120" height="120"></span>
                     <form action="{% url 'change_avatar' %}?from={{ request.get_full_path }}" method="post" enctype="multipart/form-data" style="display: none;" id="change-avatar-form">
                     {% csrf_token %}
                     {% for field in change_avatar_form %}
@@ -21,7 +21,7 @@
                     {% endfor %}
                     <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
                     <div class="clearfix"></div>
-                    <input type="submit" class="btn btn-primary" value="修改">
+                    <input id="submit_change_avatar" type="submit" class="btn btn-primary" value="修改">
                     </form>
                     <h3>昵称：<span id="old-nickname">{{ user.profile.nickname }}</span>&nbsp;
                         <span id="modify-nickname" class="glyphicon glyphicon-pencil"></span>
@@ -97,5 +97,13 @@
             });
             return false
         });
+        $("#id_avatar").change(function () {
+            var filePath = $(this)[0].files[0];
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL(filePath);
+            fileReader.onload = function () {
+              $("#avatar-set").attr("src", fileReader.result)
+            };
+        })
     </script>
 {% endblock %}

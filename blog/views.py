@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator
 from django.db.models import Count
+from django.conf import settings
 from read_record.utils import read_once_time
 from .models import Blog, BlogType
 
@@ -22,7 +23,7 @@ def blog_detail(request, blog_pk):
 
 
 def get_blog_list_common(request, blog_all_list):
-    paginator = Paginator(blog_all_list, 5)
+    paginator = Paginator(blog_all_list, settings.EACH_PAGE_NUMBER)
     page_num = request.GET.get('page', 1)
     page_of_blogs = paginator.get_page(page_num)
     page_range = paginator.page_range
