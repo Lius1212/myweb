@@ -23,3 +23,15 @@ div.django-ckeditor-widget{
     width:100%;
 
 }
+.likes-text{
+    text-align: right;
+    margin-right: 3em;
+}
+.likes-error-text{
+    text-align: right;
+    margin-right: 3em;
+    color: #FF3333;
+}
+div.comment-reply-like{
+    display: inline-block;
+}

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load comment_tags %}
 {% load user_tags %}
+{% load likes_tag %}
 {% block title %}{{ blog.title }}{% endblock %}
 {% block head_expends %}
     {% load staticfiles %}
@@ -29,6 +30,16 @@
                         <span>阅读数量({{ blog.get_read_num }})</span>
                         <span>评论数量({% get_comments_num blog %})</span>
                         <p>{{ blog.content|safe}}</p>
+                        <br>
+                        <h4 class="likes-text">
+                            <span id="like" onclick="likeChange(this,'{% get_content_type blog %}',{{ blog.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}" ></span>
+                            <span>{% get_likes_num blog %}</span>人支持
+                        </h4>
+                        <h4 class="likes-text">
+                            <span id="oppose" onclick="opposeChange(this,'{% get_content_type blog %}',{{ blog.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status blog %}" ></span>
+                            <span>{% get_oppose_num blog %}</span>人反对
+                        </h4>
+                        <h5 class="likes-error-text"></h5>
                     </div>
                 </div>
                 <div aria-label="...">
@@ -86,7 +97,16 @@
                                 <br>
                                 <div id="comment_{{ comment.pk }}">{{ comment|safe }}</div>
                                 <br>
-                                <a href="javascript:reply({{ comment.pk }});">回复</a>
+                                <a href="javascript:reply({{ comment.pk }});">回复&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                <div class="comment-reply-like">
+                                    <span onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status comment %}" ></span>
+                                    <span>{% get_likes_num comment %}</span>&nbsp;&nbsp;
+                                    </div>
+                                <div class="comment-reply-like">
+                                    <span onclick="opposeChange(this,'{% get_content_type comment %}',{{ comment.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status comment %}" ></span>
+                                    <span>{% get_oppose_num comment %}</span>
+                                </div>
+                                <span class="likes-error-text"></span>
                             </div>
                             {% for reply in comment.root_comments.all %}
                                 <div class="one-reply">
@@ -95,7 +115,16 @@
                                     <br>
                                     <div id="comment_{{ reply.pk }}">{{ reply|safe }}</div>
                                     <br>
-                                    <a href="javascript:reply({{ reply.pk }});">回复</a>
+                                    <a href="javascript:reply({{ reply.pk }});">回复&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                    <div class="comment-reply-like">
+                                        <span onclick="likeChange(this,'{% get_content_type reply %}',{{ reply.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status reply %}" ></span>
+                                        <span>{% get_likes_num reply %}</span>&nbsp;&nbsp;
+                                        </div>
+                                    <div class="comment-reply-like">
+                                        <span onclick="opposeChange(this,'{% get_content_type reply %}',{{ reply.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status reply %}" ></span>
+                                        <span>{% get_oppose_num reply %}</span>
+                                    </div>
+                                    <span class="likes-error-text"></span>
                                 </div>
                             {% endfor %}
                         {% empty %}
@@ -124,5 +153,73 @@
                 $("#comment_error").text('评论内容不能为空');
                 return false;
             }})
+        function likeChange(obj, content_type, object_id){
+            //判断是否喜欢
+            var is_like = $(obj).hasClass('text-danger');
+            $.ajax({
+                url: "{% url 'like_change' %}",
+                type: 'GET',
+                data: {
+                    content_type: content_type,
+                    object_id: object_id,
+                    is_like : is_like
+                },
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data['status']=='SUCCESS'){
+                        //以前喜欢
+                        if(is_like){
+                            $(obj).removeClass('text-danger');
+                            //隐藏提示信息
+                            $(obj).parent().next().next().text('');
+                        //以前不喜欢
+                        }else{
+                            $(obj).addClass('text-danger');
+                        }
+                        $(obj).next().text(data['likes_num']);
+                    }else {
+                        if (data['code'] == 405) {
+                            $(obj).parent().next().next().text(data['msg']);
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr)
+                }
+            })
+        }
+        function opposeChange(obj, content_type, object_id){
+            var is_oppose = $(obj).hasClass('text-danger');
+            $.ajax({
+                url: "{% url 'oppose_change' %}",
+                type: 'GET',
+                data: {
+                    content_type: content_type,
+                    object_id: object_id,
+                    is_oppose : is_oppose
+                },
+                cache: false,
+                success: function (data) {
+                    console.log(data);
+                    if(data['status']=='SUCCESS'){
+                        if(is_oppose){
+                            $(obj).removeClass('text-danger');
+                            $(obj).parent().next().text('');
+                        }else{
+                            $(obj).addClass('text-danger');
+                        }
+                        $(obj).next().text(data['opposes_num']);
+                    }else{
+                        if(data['code']==405){
+                            $(obj).parent().next().text(data['msg']);
+                        }
+                    }
+                },
+                error: function (xhr) {
+                    console.log(xhr)
+                }
+            })
+        }
     </script>
 {% endblock %}

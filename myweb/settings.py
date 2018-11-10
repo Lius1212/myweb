@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'read_record',
     'user',
     'comment',
+    'likes'
 ]
 
 MIDDLEWARE = [
