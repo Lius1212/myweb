@@ -4,7 +4,7 @@
 {% block home_active %}active{% endblock %}
 {% block bs_head_expend %}
     <div class="bs_header_content">
-        <h1>无所事事</h1>
+        <h1>记录生活</h1>
         <p>只是一个平凡人的学习记录</p>
     </div>
 {% endblock %}
@@ -21,7 +21,7 @@
                     {% endfor %}</ul>
                 </div>
                 <div class="col-md-8"><ul>
-                    <h3>博客列表 </h3>
+                    <h3><a href="{% url 'blog_list' %}">博客列表</a></h3>
                     {% for blog in blog_list %}
                         <li><a href="{% url 'blog_detail' blog.id %}">
                             {{ blog.title }}({{ blog.blog_type }})
@@ -59,6 +59,25 @@
                         <li><a href="{% url 'blog_detail' hot_blog.id %}">
                             {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
                     {% endfor %}</ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="navbar navbar-default navbar-static-top " role="navigation">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p>本站基于django2.1.2</p>
+                    <p>bootstrap-3.3.7<p>
+                </div>
+                <div class="col-md-4">
+                    <p>&copy; Welcome to my website<p>
+                    <p>liushuangctrl@163.com<p>
+                </div>
+                <div class="col-md-4">
+                    <p>友情链接<p>
                 </div>
             </div>
         </div>

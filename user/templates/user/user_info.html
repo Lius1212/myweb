@@ -84,7 +84,7 @@
                         $("#new_nickname_input").val('');
                         $("#error-nickname").text('');
                     }else {
-                        if (data['code'] == 401){
+                        if (data['code'] == 405){
                             $("#error-nickname").text(data['message']);
                         }else{
                             window.location.href='/';

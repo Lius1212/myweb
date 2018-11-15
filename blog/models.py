@@ -25,4 +25,4 @@ class Blog(models.Model, ReadNumMethod):
         ordering = ['-created_time']
 
     def __str__(self):
-        return '<Blog:%s>' % self.title
+        return '<Blog:{}>'.format(self.title)

@@ -8,4 +8,4 @@ class Profile(models.Model):
     avatar = models.ImageField(upload_to='avatars', default='avatar/default.png')
 
     def __str__(self):
-        return '<Profile: %s for %s>' % (self.nickname, self.user.username)
+        return '<Profile: {} for {}>'.format(self.nickname, self.user.username)

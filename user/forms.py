@@ -99,7 +99,8 @@ class ChangeAvatarForm(forms.Form):
         avatar = self.cleaned_data['avatar']
         if avatar.size > 2 * 2 ** 20:         # > 2mb
             raise forms.ValidationError('上传头像文件过大')
-        for suffix in ['.jpg', '.png', '.bmp', '.jpeg']:        # judge format
-            if avatar.name.endswith(suffix):
-                return avatar
+        # judge format
+        if avatar.name.endswith(('.jpg', '.png', '.bmp', '.jpeg')):
+            return avatar
+
         raise forms.ValidationError('上传头像格式错误')

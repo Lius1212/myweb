@@ -15,7 +15,6 @@ def blog_detail(request, blog_pk):
     context['previous_blog'] = previous_blog
     context['next_blog'] = next_blog
     context['blog'] = blog
-    context['blog_type'] = blog.blog_type
     response = render(request, 'blog/blog_detail.html', context)
     # Set and judge
     response.set_cookie(read_once_time(request, blog), 'true', max_age=600)

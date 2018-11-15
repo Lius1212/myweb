@@ -15,9 +15,11 @@ class UserAdmin(BaseUserAdmin):
 
     def nickname(self, obj):
         return obj.profile.nickname
+    nickname.short_description = '昵称'
 
     def avatar(self, obj):
         return obj.profile.avatar.url
+    avatar.short_description = '头像路径'
 
 
 admin.site.unregister(User)

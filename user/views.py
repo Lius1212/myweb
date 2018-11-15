@@ -1,5 +1,5 @@
 import os
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -7,6 +7,16 @@ from django.conf import settings
 from django.http import JsonResponse
 from .models import Profile
 from .forms import LoginForm, RegisterForm, ChangePasswordForm, ChangeAvatarForm
+
+
+def login_modal(request):
+    login_form = LoginForm(request.POST)
+    if login_form.is_valid():
+        user = login_form.cleaned_data['user']
+        auth.login(request, user)
+        return JsonResponse({'status': 'SUCCESS'})
+    else:
+        return JsonResponse({'status': 'ERROR', 'msg': '用户名或密码错误'})
 
 
 def login(request):
@@ -80,14 +90,14 @@ def change_nickname(request):
     user = request.user
     data = {}
     if not user.is_authenticated:
-        data['code'] = 400
+        data['code'] = 401
         data['message'] = '用户尚未登录!'
         data['status'] = 'ERROR'
         return JsonResponse(data)
 
     nickname = request.GET.get('nickname', '').strip()
     if nickname.strip() == '':
-        data['code'] = 401
+        data['code'] = 405
         data['message'] = '新昵称不能为空!'
         data['status'] = 'ERROR'
     else:
@@ -116,3 +126,18 @@ def upload_avatar(avatar, username):
         for chunk in avatar.chunks():
             f.write(chunk)
     return avatar_dir
+
+
+def homepage(request, user_pk):
+    user_ = get_object_or_404(User, pk=user_pk)
+    blogs = user_.blog_set.all().order_by('-created_time')
+    comments = user_.comments.all().order_by('-created_time')
+    likes = user_.likerecord_set.all().order_by('-liked_time')
+
+    context = {}
+    context['user_'] = user_
+    context['blogs'] = blogs
+    context['comments'] = comments
+    context['likes'] = likes
+
+    return render(request, 'user/homepage.html', context)

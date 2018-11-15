@@ -8,15 +8,15 @@ from blog.models import Blog
 
 def read_once_time(request, obj):
     ct = ContentType.objects.get_for_model(obj)
-    key = '%s_%s_read' % (ct.model, obj.pk)
+    key = '{}_{}_read'.format(ct.model, obj.pk)
     if not request.COOKIES.get(key):
-        readnum, creared = ReadNum.objects.get_or_create(content_type=ct, object_id=obj.pk)
-        readnum.read_num += 1
-        readnum.save()
+        read_num_, created = ReadNum.objects.get_or_create(content_type=ct, object_id=obj.pk)
+        read_num_.read_num += 1
+        read_num_.save()
         date = timezone.now().date()
-        readdetail, creared = ReadDetail.objects.get_or_create(content_type=ct, object_id=obj.pk, date=date)
-        readdetail.read_num += 1
-        readdetail.save()
+        read_detail, created = ReadDetail.objects.get_or_create(content_type=ct, object_id=obj.pk, date=date)
+        read_detail.read_num += 1
+        read_detail.save()
     return key
 
 
@@ -40,7 +40,5 @@ def month_hot_data():
     date = today - datetime.timedelta(days=30)
     blogs = Blog.objects.filter(read_details__date__lte=today,
                                 read_details__date__gte=date).values('id', 'title').annotate(
-        read_num_sum=Sum('read_details__read_num')).order_by('-read_num_sum')
+                                read_num_sum=Sum('read_details__read_num')).order_by('-read_num_sum')
     return blogs[:7]
-
-

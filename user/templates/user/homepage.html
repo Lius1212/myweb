@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load comment_tags %}
+{% load user_tags %}
+{% load likes_tag %}
+{% block title %}{% get_nickname_or_username user_ %}的个人主页{% endblock %}
+{% block head_expends %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{% get_nickname_or_username user_ %}的博客</div>
+                    <div class="panel-body">
+                        <ul class="homepage-ul">
+                            {% for blog in blogs %}
+                                <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+                            {% empty %}
+                                <p>暂无，敬请期待</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">{% get_nickname_or_username user_ %}的评论</div>
+                    <div class="panel-body">
+                        <ul class="homepage-ul">
+                            {% for comment in comments %}
+                                {% if comment.parent %}
+                                    {% get_comment_to comment as blog_and_comment %}
+                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}</li>
+                                    <li>{{ comment.content|safe }}</li>
+                                {% else %}
+                                    <li>博客：{% get_comment_to comment as blog %}<a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+                                    <li>{{ comment.content|safe }}</li>
+                                {% endif %}
+                            {% empty %}
+                                <p>暂无，敬请期待</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">{% get_nickname_or_username user_ %}的点赞</div>
+                    <div class="panel-body">
+                        <ul class="homepage-ul">
+                            {% for like in likes %}
+                                {% get_like_to like as blog_and_comment %}
+                                {% if blog_and_comment.0 %}
+                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}</li>
+                                {% else %}
+                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.pk %}">{{ blog_and_comment.title }}</a></li>
+                                {% endif %}
+                            {% empty %}
+                                <p>暂无，敬请期待</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script_extend %}{% endblock %}

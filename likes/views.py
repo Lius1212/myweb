@@ -7,7 +7,7 @@ from .models import LikeCount, LikeRecord, OpposeRecord, OpposeCount
 def like_change(request):
     user = request.user
     if not user.is_authenticated:
-        return JsonResponse({'status': 'ERROR', 'msg': 'you were not login'})
+        return JsonResponse({'status': 'ERROR', 'code': 401, 'msg': 'you were not login'})
 
     content_type = request.GET.get('content_type')
     object_id = int(request.GET.get('object_id'))
@@ -51,7 +51,7 @@ def like_change(request):
 def oppose_change(request):
     user = request.user
     if not user.is_authenticated:
-        return JsonResponse({'status': 'ERROR', 'msg': 'you were not login'})
+        return JsonResponse({'status': 'ERROR', 'code': 401, 'msg': 'you were not login'})
 
     content_type = request.GET.get('content_type')
     object_id = int(request.GET.get('object_id'))
@@ -65,6 +65,7 @@ def oppose_change(request):
     if request.GET.get('is_oppose') == 'false':
         if LikeRecord.objects.filter(content_type=content_type, object_id=object_id, user=user).exists():
             return JsonResponse({'status': 'ERROR', 'code': 405, 'msg': '你已经支持过了QAQ'})
+
         oppose_record, created = OpposeRecord.objects.get_or_create(content_type=content_type, object_id=object_id, user=user)
         if created:
             oppose_count, created = OpposeCount.objects.get_or_create(content_type=content_type, object_id=object_id)

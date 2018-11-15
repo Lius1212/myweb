@@ -1,6 +1,9 @@
 from django import template
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.contenttypes.fields import ContentType
 from ..models import LikeCount, LikeRecord, OpposeCount, OpposeRecord
+from blog.models import Blog
+from comment.models import Comment
 
 register = template.Library()
 
@@ -47,3 +50,16 @@ def get_oppose_status(context, obj):
         return 'text-danger'
     else:
         return ''
+
+
+@register.simple_tag
+def get_like_to(obj):
+    model_class = obj.content_type.model_class()   # Blog/ Comment
+    if model_class == Blog:
+        return model_class.objects.get(id=obj.object_id)
+    elif model_class == Comment:
+        comment = model_class.objects.get(id=obj.object_id)
+        blog = Blog.objects.get(id=comment.object_id)
+        return blog, comment
+    else:
+        raise ObjectDoesNotExist('No type for liked')
