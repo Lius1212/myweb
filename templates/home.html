@@ -13,71 +13,81 @@
         <div class="hot_data">
             <div class="block-title">本站一共{{ blog_nums }}篇博客</div>
             <div class="row">
-                <div class="col-md-4"><ul>
-                    <h3>分类排行 </h3>
-                    {% for blog_type in blog_types_sequence %}
-                        <li><a href="{% url 'blog_with_type' blog_type.pk %}">
-                            {{ blog_type.type_name }}({{ blog_type.blog_count }})</a></li>
-                    {% endfor %}</ul>
+                <div class="col-md-4">
+                    <ul>
+                        <h3>分类排行 </h3>
+                        {% for blog_type in blog_types_sequence %}
+                            <li><a href="{% url 'blog_with_type' blog_type.pk %}">
+                                {{ blog_type.type_name }}({{ blog_type.blog_count }})</a></li>
+                        {% endfor %}</ul>
                 </div>
-                <div class="col-md-8"><ul>
-                    <h3><a href="{% url 'blog_list' %}">博客列表</a></h3>
-                    {% for blog in blog_list %}
-                        <li><a href="{% url 'blog_detail' blog.id %}">
-                            {{ blog.title }}({{ blog.blog_type }})
-                            {% if blog.get_read_num > 5 %}
-                                <span class="text-danger glyphicon glyphicon-fire"></span>
-                            {% endif %}</a></li>
-                    {% endfor %}</ul>
+                <div class="col-md-8">
+                    <ul>
+                        <h3><a href="{% url 'blog_list' %}">博客列表</a></h3>
+                        {% for blog in blog_list %}
+                            <li><a href="{% url 'blog_detail' blog.id %}">
+                                {{ blog.title }}({{ blog.blog_type }})
+                                {% if blog.get_read_num > 5 %}
+                                    <span class="text-danger glyphicon glyphicon-fire"></span>
+                                {% endif %}</a></li>
+                        {% endfor %}</ul>
                 </div>
-
             </div>
         </div>
-
         <div class="hot_data">
             <div class="block-title">
                 阅读热榜 <span class="text-danger glyphicon glyphicon-fire"></span>
             </div>
             <div class="row">
-                <div class="col-md-4"><ul>
-                    <h3>今日热门阅读</h3>
-                    {% for hot_blog in today_hot_blog %}
-                        <li><a href="{% url 'blog_detail' hot_blog.content_object.pk %}">
-                            {{ hot_blog.content_object.title }}({{ hot_blog.read_num }})</a></li>
-                    {% endfor %}</ul>
+                <div class="col-md-4">
+                    <ul>
+                        <h3>今日热门阅读</h3>
+                        {% for hot_blog in today_hot_blog %}
+                            <li><a href="{% url 'blog_detail' hot_blog.content_object.pk %}">
+                                {{ hot_blog.content_object.title }}({{ hot_blog.read_num }})</a></li>
+                        {% endfor %}</ul>
                 </div>
-                <div class="col-md-4"><ul>
-                    <h3>本周热门阅读</h3>
-                    {% for hot_blog in week_hot_blog %}
-                        <li><a href="{% url 'blog_detail' hot_blog.id %}">
-                            {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
-                    {% endfor %}</ul>
+                <div class="col-md-4">
+                    <ul>
+                        <h3>本周热门阅读</h3>
+                        {% for hot_blog in week_hot_blog %}
+                            <li><a href="{% url 'blog_detail' hot_blog.id %}">
+                                {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
+                        {% endfor %}</ul>
                 </div>
-                <div class="col-md-4"><ul>
-                    <h3>近三十日热门阅读</h3>
-                    {% for hot_blog in month_hot_blog %}
-                        <li><a href="{% url 'blog_detail' hot_blog.id %}">
-                            {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
-                    {% endfor %}</ul>
+                <div class="col-md-4">
+                    <ul>
+                        <h3>近三十日热门阅读</h3>
+                        {% for hot_blog in month_hot_blog %}
+                            <li><a href="{% url 'blog_detail' hot_blog.id %}">
+                                {{ hot_blog.title }}({{ hot_blog.read_num_sum }})</a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
     <br>
-    <div class="navbar navbar-default navbar-static-top " role="navigation">
+    <div class="navbar navbar-inverse navbar-static-top home-footer" role="navigation">
         <br>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <p>本站基于django2.1.2</p>
-                    <p>bootstrap-3.3.7<p>
+                    <h4 class="home-footer-title">关于本站</h4>
+                    <p><a href="https://docs.djangoproject.com/en/2.1/">本站基于django2.1.2</a></p>
+                    <p><a href="https://v3.bootcss.com/">bootstrap-3.3.7</a></p>
+                    <p></p>
                 </div>
                 <div class="col-md-4">
-                    <p>&copy; Welcome to my website<p>
-                    <p>liushuangctrl@163.com<p>
+                    <h4 class="home-footer-title">联系作者</h4>
+                    <p>&copy; Welcome to my website</p>
+                    <p></p>
+                    <p>liushuangctrl@163.com</p>
+                    <p></p>
                 </div>
                 <div class="col-md-4">
-                    <p>友情链接<p>
+                    <h4 class="home-footer-title">友情链接</h4>
+                    <p></p>
                 </div>
             </div>
         </div>

@@ -56,5 +56,13 @@ div.block-title{
     border-radius: 10px;
     height: 50px;
     width: 50px;
-    background-color: #66afe9;
+    background-color: #b9b9b9;
 }
+.home-footer *{
+    color:#99979c;
+}
+.home-footer a{
+    color:#f1f5fa;
+}
+
+

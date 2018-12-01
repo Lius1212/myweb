@@ -24,104 +24,118 @@
                         </h3>
                     </div>
                     <div class="panel-body">
-                        <span>作者：<a href="{% url 'homepage' blog.author.pk %}">{% get_nickname_or_username blog.author %}</a></span>
+                        <span>作者：<a
+                                href="{% url 'homepage' blog.author.pk %}">{% get_nickname_or_username blog.author %}</a></span>
                         <span>分类：<a href="{% url 'blog_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a></span>
                         <span>创建时间：{{ blog.created_time|date:'Y-m-d' }}</span>
                         <span>阅读数量({{ blog.get_read_num }})</span>
                         <span>评论数量({% get_comments_num blog %})</span>
-                        <p>{{ blog.content|safe}}</p>
+                        <p>{{ blog.content|safe }}</p>
                         <br>
                         <h4 class="likes-text">
-                            <span id="like" onclick="likeChange(this,'{% get_content_type blog %}',{{ blog.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}" ></span>
+                            <span id="like" onclick="likeChange(this,'{% get_content_type blog %}',{{ blog.pk }})"
+                                  class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}"></span>
                             <span>{% get_likes_num blog %}</span>人支持
                         </h4>
                         <h4 class="likes-text">
-                            <span id="oppose" onclick="opposeChange(this,'{% get_content_type blog %}',{{ blog.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status blog %}" ></span>
+                            <span id="oppose" onclick="opposeChange(this,'{% get_content_type blog %}',{{ blog.pk }})"
+                                  class="glyphicon glyphicon-thumbs-down {% get_oppose_status blog %}"></span>
                             <span>{% get_oppose_num blog %}</span>人反对
                         </h4>
                         <h5 class="likes-error-text"></h5>
                     </div>
                 </div>
                 <div aria-label="...">
-                  <ul class="pager">
-                      {% if previous_blog %}
-                        <li class="previous"><a href="{% url 'blog_detail' previous_blog.pk %}">
-                            <span aria-hidden="true">&larr;</span>上一篇：{{ previous_blog.title }}</a></li>
-                        <br>
-                      {% endif %}
-                      {% if next_blog %}
-                        <li class="next"><a href="{% url 'blog_detail' next_blog.pk %}">
-                            下一篇：{{ next_blog.title }}<span aria-hidden="true">&rarr;</span></a></li>
-                      {% endif %}
-                  </ul>
+                    <ul class="pager">
+                        {% if previous_blog %}
+                            <li class="previous"><a href="{% url 'blog_detail' previous_blog.pk %}">
+                                <span aria-hidden="true">&larr;</span>上一篇：{{ previous_blog.title }}</a></li>
+                            <br>
+                        {% endif %}
+                        {% if next_blog %}
+                            <li class="next"><a href="{% url 'blog_detail' next_blog.pk %}">
+                                下一篇：{{ next_blog.title }}<span aria-hidden="true">&rarr;</span></a></li>
+                        {% endif %}
+                    </ul>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-footer">
-                    <h4>发表评论</h4>
+                        <h4>发表评论</h4>
                     </div>
                     <div class="panel-body">
                         {% if user.is_authenticated %}
-                            <form id="comment_form" action="{% url 'create_comment' %}?from={{ request.get_full_path }}" method="post" >
+                            <form id="comment_form" action="{% url 'create_comment' %}?from={{ request.get_full_path }}"
+                                  method="post">
                                 <h4>{% get_nickname_or_username user %} 欢迎评论~~~</h4>
                                 <div id="reply_content_container" style="display: none">
                                     <div>回复：</div>
                                     <div id="reply_content"></div>
                                 </div>
                                 {% csrf_token %}
-                                {% get_comment_form  blog as comment_form %}
+                                {% get_comment_form blog as comment_form %}
                                 {% for field in comment_form %}
                                     {{ field }}
                                 {% endfor %}
-                            <span id="comment_error" class="text-danger pull-left"></span>
-                            <input type="submit" id="submit-comment-button" value="提交评论" class="btn btn-primary pull-right">
+                                <span id="comment_error" class="text-danger pull-left"></span>
+                                <input type="submit" id="submit-comment-button" value="提交评论"
+                                       class="btn btn-primary pull-right">
                             </form>
                         {% else %}
                             <span>尚未登录，登录后可发起评论~~~</span>
                             <a href="{% url 'login' %}?from={{ request.get_full_path }}">
-                                <button type="button" class="btn btn-primary">登录</button></a>or
+                                <button type="button" class="btn btn-primary">登录</button>
+                            </a>or
                             <a href="{% url 'register' %}?from={{ request.get_full_path }}">
-                                <button type="button" class="btn btn-danger">注册</button></a>
+                                <button type="button" class="btn btn-danger">注册</button>
+                            </a>
                         {% endif %}
                     </div>
                 </div>
                 <div class="panel panel-primary">
                     <div class="panel-footer">
-                    <h4>评论区</h4>
+                        <h4>评论区</h4>
                     </div>
                     <div class="panel-body">
                         {% get_comments_list blog as comments %}
                         {% for  comment in comments %}
                             <div class="one-comment">
-                                <div><h4><a href="{% url 'homepage' comment.commentator.pk %}">{% get_nickname_or_username comment.commentator %}</a></h4></div>
+                                <div><h4><a
+                                        href="{% url 'homepage' comment.commentator.pk %}"> <img src="{{ comment.commentator.profile.avatar.url }}" alt="" width="25" height="25"> {% get_nickname_or_username comment.commentator %}</a>
+                                </h4></div>
                                 <div>created at {{ comment.created_time }}</div>
                                 <br>
                                 <div id="comment_{{ comment.pk }}">{{ comment|safe }}</div>
                                 <br>
                                 <a href="javascript:reply({{ comment.pk }},{{ user.pk|default:0 }})">回复&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                 <div class="comment-reply-like">
-                                    <span onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status comment %}" ></span>
+                                    <span onclick="likeChange(this,'{% get_content_type comment %}',{{ comment.pk }})"
+                                          class="glyphicon glyphicon-thumbs-up {% get_like_status comment %}"></span>
                                     <span>{% get_likes_num comment %}</span>&nbsp;&nbsp;
-                                    </div>
+                                </div>
                                 <div class="comment-reply-like">
-                                    <span onclick="opposeChange(this,'{% get_content_type comment %}',{{ comment.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status comment %}" ></span>
+                                    <span onclick="opposeChange(this,'{% get_content_type comment %}',{{ comment.pk }})"
+                                          class="glyphicon glyphicon-thumbs-down {% get_oppose_status comment %}"></span>
                                     <span>{% get_oppose_num comment %}</span>
                                 </div>
                                 <span class="likes-error-text"></span>
                             </div>
                             {% for reply in comment.root_comments.all %}
                                 <div class="one-reply">
-                                    <div><h4><a href="{% url 'homepage' reply.commentator.pk %}">{% get_nickname_or_username reply.commentator %}</a> 回复 <a href="{% url 'homepage' reply.reply_to.pk %}">{% get_nickname_or_username reply.reply_to %}</a></h4></div>
+                                    <div><h4><a href="{% url 'homepage' reply.commentator.pk %}"><img src="{{ reply.commentator.profile.avatar.url }}" alt="" width="25" height="25"> {% get_nickname_or_username reply.commentator %}</a> 回复 <a href="{% url 'homepage' reply.reply_to.pk %}"><img src="{{ reply.reply_to.profile.avatar.url }}" alt="" width="25" height="25"> {% get_nickname_or_username reply.reply_to %}</a>
+                                    </h4></div>
                                     <div>created at {{ reply.created_time }}</div>
                                     <br>
                                     <div id="comment_{{ reply.pk }}">{{ reply|safe }}</div>
                                     <br>
                                     <a href="javascript:reply({{ reply.pk }},{{ user.pk|default:0 }})">回复&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                     <div class="comment-reply-like">
-                                        <span onclick="likeChange(this,'{% get_content_type reply %}',{{ reply.pk }})" class="glyphicon glyphicon-thumbs-up {% get_like_status reply %}" ></span>
+                                        <span onclick="likeChange(this,'{% get_content_type reply %}',{{ reply.pk }})"
+                                              class="glyphicon glyphicon-thumbs-up {% get_like_status reply %}"></span>
                                         <span>{% get_likes_num reply %}</span>&nbsp;&nbsp;
-                                        </div>
+                                    </div>
                                     <div class="comment-reply-like">
-                                        <span onclick="opposeChange(this,'{% get_content_type reply %}',{{ reply.pk }})" class="glyphicon glyphicon-thumbs-down {% get_oppose_status reply %}" ></span>
+                                        <span onclick="opposeChange(this,'{% get_content_type reply %}',{{ reply.pk }})"
+                                              class="glyphicon glyphicon-thumbs-down {% get_oppose_status reply %}"></span>
                                         <span>{% get_oppose_num reply %}</span>
                                     </div>
                                     <span class="likes-error-text"></span>
@@ -141,23 +155,26 @@
 {% block script_extend %}
     <script type="text/javascript">
         function reply(reply_comment_id, user_id) {
-            if(user_id==0){
+            if (user_id == 0) {
                 $("#login-modal").modal('show');
-            }else{
+            } else {
                 $("#reply_comment_id").val(reply_comment_id);
                 var html = $("#comment_" + reply_comment_id).html();
                 $('#reply_content').html(html);
                 $('#reply_content_container').show();
                 $('html').animate({scrollTop: $('#comment_form').offset().top - 150});
-                    CKEDITOR.instances['id_content'].focus();
+                CKEDITOR.instances['id_content'].focus();
             }
         }
-        $("#comment_form").submit(function() {
+
+        $("#comment_form").submit(function () {
             if (CKEDITOR.instances["id_content"].document.getBody().getText().trim() === '') {
                 $("#comment_error").text('评论内容不能为空');
                 return false;
-            }})
-        function likeChange(obj, content_type, object_id){
+            }
+        });
+
+        function likeChange(obj, content_type, object_id) {
             //判断是否喜欢
             var is_like = $(obj).hasClass('text-danger');
             $.ajax({
@@ -166,27 +183,27 @@
                 data: {
                     content_type: content_type,
                     object_id: object_id,
-                    is_like : is_like
+                    is_like: is_like
                 },
                 cache: false,
                 success: function (data) {
                     //console.log(data);
-                    if(data['status']=='SUCCESS'){
+                    if (data['status'] == 'SUCCESS') {
                         //以前喜欢
-                        if(is_like){
+                        if (is_like) {
                             $(obj).removeClass('text-danger');
                             //隐藏提示信息
                             $(obj).parent().next().next().text('');
-                        //以前不喜欢
-                        }else{
+                            //以前不喜欢
+                        } else {
                             $(obj).addClass('text-danger');
                         }
                         $(obj).next().text(data['likes_num']);
-                    }else {
+                    } else {
                         if (data['code'] == 405) {
                             $(obj).parent().next().next().text(data['msg']);
-                        }else{
-                            if(data['code']==401) {
+                        } else {
+                            if (data['code'] == 401) {
                                 $('#login-modal').modal('show');
                             }
                         }
@@ -197,7 +214,8 @@
                 }
             })
         }
-        function opposeChange(obj, content_type, object_id){
+
+        function opposeChange(obj, content_type, object_id) {
             var is_oppose = $(obj).hasClass('text-danger');
             $.ajax({
                 url: "{% url 'oppose_change' %}",
@@ -205,24 +223,24 @@
                 data: {
                     content_type: content_type,
                     object_id: object_id,
-                    is_oppose : is_oppose
+                    is_oppose: is_oppose
                 },
                 cache: false,
                 success: function (data) {
                     console.log(data);
-                    if(data['status']=='SUCCESS'){
-                        if(is_oppose){
+                    if (data['status'] == 'SUCCESS') {
+                        if (is_oppose) {
                             $(obj).removeClass('text-danger');
                             $(obj).parent().next().text('');
-                        }else{
+                        } else {
                             $(obj).addClass('text-danger');
                         }
                         $(obj).next().text(data['opposes_num']);
-                    }else{
-                        if(data['code']==405){
+                    } else {
+                        if (data['code'] == 405) {
                             $(obj).parent().next().text(data['msg']);
-                        }else{
-                            if(data['code']==401){
+                        } else {
+                            if (data['code'] == 401) {
                                 $('#login-modal').modal('show');
                             }
                         }
