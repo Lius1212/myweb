@@ -20,7 +20,10 @@
       <change beforePath="$PROJECT_DIR$/likes/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/likes/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/likes/migrations/0002_opposecount_opposerecord.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/likes/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/likes/views.py" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/myweb/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myweb/settings.py" afterDir="false" />
+=======
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
       <change beforePath="$PROJECT_DIR$/read_record/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/read_record/migrations/0001_initial.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/read_record/migrations/0002_readdetail.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/read_record/migrations/0003_auto_20181027_2051.py" beforeDir="false" />
@@ -85,11 +88,19 @@
     <session id="718423938">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
           <entry key="project.closed" value="50" />
           <entry key="project.open.time.0" value="6" />
           <entry key="project.open.time.1" value="10" />
           <entry key="project.open.time.10" value="8" />
           <entry key="project.open.time.11" value="4" />
+=======
+          <entry key="project.closed" value="49" />
+          <entry key="project.open.time.0" value="6" />
+          <entry key="project.open.time.1" value="10" />
+          <entry key="project.open.time.10" value="8" />
+          <entry key="project.open.time.11" value="3" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.16" value="1" />
@@ -100,8 +111,13 @@
           <entry key="project.open.time.6" value="3" />
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="6" />
+<<<<<<< HEAD
           <entry key="project.open.time.9" value="8" />
           <entry key="project.opened" value="58" />
+=======
+          <entry key="project.open.time.9" value="7" />
+          <entry key="project.opened" value="56" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -110,7 +126,12 @@
           <entry key="blog_blog" value="2" />
           <entry key="comment_comment" value="2" />
           <entry key="css" value="30" />
+<<<<<<< HEAD
           <entry key="html" value="251" />
+=======
+          <entry key="django_migrations" value="1" />
+          <entry key="html" value="250" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="jpeg" value="1" />
           <entry key="jpg" value="5" />
           <entry key="js" value="1" />
@@ -119,18 +140,32 @@
           <entry key="likes_opposecount" value="1" />
           <entry key="likes_opposerecord" value="2" />
           <entry key="png" value="3" />
+<<<<<<< HEAD
           <entry key="py" value="467" />
+=======
+          <entry key="py" value="466" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="rnc" value="1" />
+          <entry key="sqlite_master" value="1" />
+          <entry key="sqlite_sequence" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="30" />
+<<<<<<< HEAD
           <entry key="Database Element" value="15" />
           <entry key="HTML" value="251" />
           <entry key="Image" value="9" />
           <entry key="JavaScript" value="1" />
           <entry key="Python" value="467" />
+=======
+          <entry key="Database Element" value="18" />
+          <entry key="HTML" value="250" />
+          <entry key="Image" value="9" />
+          <entry key="JavaScript" value="1" />
+          <entry key="Python" value="466" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="RNG Compact" value="1" />
         </counts>
       </usages-collector>
@@ -140,7 +175,11 @@
           <entry key="css" value="613" />
           <entry key="dummy" value="4" />
           <entry key="html" value="11343" />
+<<<<<<< HEAD
           <entry key="py" value="15865" />
+=======
+          <entry key="py" value="15853" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="txt" value="2" />
         </counts>
       </usages-collector>
@@ -149,7 +188,11 @@
           <entry key="CSS" value="613" />
           <entry key="HTML" value="11343" />
           <entry key="PLAIN_TEXT" value="6" />
+<<<<<<< HEAD
           <entry key="Python" value="15865" />
+=======
+          <entry key="Python" value="15853" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           <entry key="Scratch" value="4" />
         </counts>
       </usages-collector>
@@ -183,11 +226,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/sqlite_master">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/sqlite_sequence">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/myweb/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-250">
               <caret line="97" column="31" lean-forward="true" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
+=======
+        <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/django_migrations">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
             </state>
           </provider>
         </entry>
@@ -264,6 +332,10 @@
         <option value="$PROJECT_DIR$/blog/views.py" />
         <option value="$PROJECT_DIR$/comment/models.py" />
         <option value="$PROJECT_DIR$/likes/templatetags/likes_tag.py" />
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/myweb/settings.py" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
         <option value="$PROJECT_DIR$/comment/admin.py" />
         <option value="$PROJECT_DIR$/user/models.py" />
         <option value="$PROJECT_DIR$/user/admin.py" />
@@ -285,7 +357,10 @@
         <option value="$PROJECT_DIR$/templates/base.html" />
         <option value="$PROJECT_DIR$/blog/templates/blog/blog_detail.html" />
         <option value="$PROJECT_DIR$/user/templates/user/user_info.html" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/myweb/settings.py" />
+=======
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
       </list>
     </option>
   </component>
@@ -321,7 +396,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -329,15 +403,19 @@
               <item name="myweb" type="b2602c69:ProjectViewProjectNode" />
               <item name="myweb" type="462c0819:PsiDirectoryNode" />
             </path>
+<<<<<<< HEAD
             <path>
               <item name="myweb" type="b2602c69:ProjectViewProjectNode" />
               <item name="myweb" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
+=======
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,7 +516,11 @@
   <component name="ToolWindowManager">
     <frame x="1913" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13538875" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13270777" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info active="true" anchor="bottom" id="manage.py@myweb" visible="true" weight="0.32892805" />
@@ -461,7 +543,11 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.3297587" />
+<<<<<<< HEAD
       <window_info anchor="right" id="Database" order="4" weight="0.3974152" />
+=======
+      <window_info anchor="right" id="Database" order="4" weight="0.39678285" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,6 +587,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="1" />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/media/avatars/20150608153107_tHAjf.jpeg" />
     <entry file="file://$PROJECT_DIR$/comment/urls.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -512,6 +599,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
     <entry file="file://E:/Anaconda3/envs/site_dj_env/Lib/site-packages/django/core/exceptions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4223" />
@@ -725,6 +814,32 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/static/user.css">
+<<<<<<< HEAD
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/templates/user/homepage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="105" column="14" lean-forward="true" selection-start-line="105" selection-start-column="14" selection-end-line="105" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+=======
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="18" />
@@ -752,6 +867,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myweb/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3550">
+          <caret line="142" column="28" lean-forward="true" selection-start-line="142" selection-start-column="28" selection-end-line="142" selection-end-column="28" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myweb/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -766,6 +889,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/blog_detail.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -799,6 +923,57 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-250">
           <caret line="97" column="31" lean-forward="true" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
+=======
+    <entry file="file://$PROJECT_DIR$/templates/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="70" column="67" selection-start-line="70" selection-start-column="56" selection-end-line="70" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blog/templates/blog/blog_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="123" column="179" selection-start-line="123" selection-start-column="179" selection-end-line="123" selection-end-column="179" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="43" column="98" selection-start-line="42" selection-start-column="96" selection-end-line="43" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/templates/user/user_info.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="725">
+          <caret line="29" column="106" selection-start-line="29" selection-start-column="106" selection-end-line="29" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/user/migrations/0003_profile.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/sqlite_master">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/sqlite_sequence">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://c3e56450-425a-41ae-ac65-5d10e63ebbe8/schema/main/table/django_migrations">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+>>>>>>> 874a91fc395e04584900755f13f7cc7895a571ec
         </state>
       </provider>
     </entry>
