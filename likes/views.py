@@ -23,7 +23,8 @@ def like_change(request):
         if OpposeRecord.objects.filter(content_type=content_type, object_id=object_id, user=user).exists():
             return JsonResponse({'status': 'ERROR', 'code': 405, 'msg': '你已经反对过了QAQ'})
         # don't like before
-        like_record, created = LikeRecord.objects.get_or_create(content_type=content_type, object_id=object_id, user=user)
+        like_record, created = LikeRecord.objects.get_or_create(content_type=content_type, object_id=object_id,
+                                                                user=user)
         if created:
             like_count, created = LikeCount.objects.get_or_create(content_type=content_type, object_id=object_id)
             like_count.likes_num += 1
@@ -66,7 +67,8 @@ def oppose_change(request):
         if LikeRecord.objects.filter(content_type=content_type, object_id=object_id, user=user).exists():
             return JsonResponse({'status': 'ERROR', 'code': 405, 'msg': '你已经支持过了QAQ'})
 
-        oppose_record, created = OpposeRecord.objects.get_or_create(content_type=content_type, object_id=object_id, user=user)
+        oppose_record, created = OpposeRecord.objects.get_or_create(content_type=content_type, object_id=object_id,
+                                                                    user=user)
         if created:
             oppose_count, created = OpposeCount.objects.get_or_create(content_type=content_type, object_id=object_id)
             oppose_count.opposes_num += 1

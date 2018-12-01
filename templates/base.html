@@ -13,126 +13,146 @@
     {% block head_expends %}{% endblock %}
 </head>
 <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{% url 'home' %}">刘爽的个人博客</a>
-                <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div id="navbar-collapse" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="{% block home_active %}{% endblock %}"><a href="{% url 'home' %}">主页</a></li>
-                    <li class="{% block blog_active %}{% endblock %}"><a href="{% url 'blog_list' %}">博客</a></li>
-                </ul>
-                <form id="search_form" class="navbar-form navbar-left" method="GET" action="{% url 'blog_search' %}?from={{ request.get_full_path }}">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input id="search_text" type="text" class="form-control" placeholder="Search" name="keyword">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if user.is_authenticated %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% get_nickname_or_username user %}&nbsp;&nbsp;<img src="{{ user.profile.avatar.url }}" alt="" width="25" height="25">&nbsp;&nbsp;<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url 'user_info' %}">个人信息</a></li>
-                                {% if user.is_superuser %}
-                                    <li><a href="{% url 'admin:index' %}">后台管理</a></li>
-                                {% endif %}
-                                <li><a href="{% url 'change_password' %}?from={{ request.get_full_path }}">修改密码</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li><a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a></li>
-                        <li><a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a></li>
-                    {% endif %}
-                 </ul>
-            </div>
-        <button id="back_top_button" onclick="backTop()">↑</button>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'home' %}">刘爽的个人博客</a>
+            <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
-    </div >
+        <div id="navbar-collapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="{% block home_active %}{% endblock %}"><a href="{% url 'home' %}">主页</a></li>
+                <li class="{% block blog_active %}{% endblock %}"><a href="{% url 'blog_list' %}">博客</a></li>
+            </ul>
+            <form id="search_form" class="navbar-form navbar-left" method="GET"
+                  action="{% url 'blog_search' %}?from={{ request.get_full_path }}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input id="search_text" type="text" class="form-control" placeholder="搜索博文" name="keyword">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated %}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{% get_nickname_or_username user %}&nbsp;&nbsp;<img
+                                src="{{ user.profile.avatar.url }}" alt="" width="25" height="25">&nbsp;&nbsp;<span
+                                class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'user_info' %}">个人信息</a></li>
+                            {% if user.is_superuser %}
+                                <li><a href="/admin/blog/blog/add/">新增博客</a></li>
+                                <li><a href="{% url 'admin:index' %}">后台管理</a></li>
+                            {% endif %}
+                            <li><a href="{% url 'change_password' %}?from={{ request.get_full_path }}">修改密码</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a></li>
+                    <li><a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <button id="back_top_button"><span class="glyphicon glyphicon-menu-up"></span></button>
+        <button style="position: fixed; bottom: 40%;right: 0"  type="button" class="btn btn-primary" data-container="body" data-toggle="popover"            data-placement="left" data-template="<div class='popover' role='tooltip'><div class='arrow'></div><h3 class='popover-title' style='text-align:center'></h3><div class='popover-content'></div><img src='{% static 'wechatcode.jpg' %}' width='160' height='160'></div>" data-title="微信" data-trigger="hover">
+            联<br>系<br>作<br>者
+        </button>
+    </div>
+</div>
 
-    <div class="bs-header">{% block bs_head_expend %}{% endblock %}</div>
-    {% block content %}{% endblock %}
+<div class="bs-header">{% block bs_head_expend %}{% endblock %}</div>
+{% block content %}{% endblock %}
 
-    <!-- Modal -->
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-sm" role="document">
-            <form id="login_modal_form" action="" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">登录</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            {% csrf_token %}
-                            {% for field in login_modal_form %}
-                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                                {{ field }}
-                            {% endfor %}
-                            <span id="login_modal_tip" class="pull-left text-danger"></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{% url 'register' %}"><button type="button" class="btn btn-danger pull-left">注册</button></a>
-                        <button type="submit" class="btn btn-primary">登录</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+<!-- Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <form id="login_modal_form" action="" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">登录</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        {% csrf_token %}
+                        {% for field in login_modal_form %}
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                        {% endfor %}
+                        <span id="login_modal_tip" class="pull-left text-danger"></span>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <a href="{% url 'register' %}">
+                        <button type="button" class="btn btn-danger pull-left">注册</button>
+                    </a>
+                    <button type="submit" class="btn btn-primary">登录</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </form>
     </div>
-
-
-    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript">
-        $("#search_form").submit(function () {
-            if($("#search_text").val().trim() === '')
-                return false;
-        });
-        window.onscroll = function() {
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
-                $('#back_top_button').show();
-            }else{
-                $('#back_top_button').hide();
-            }
-        };
-        function backTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+</div>
+<script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+    $("#search_form").submit(function () {
+        var $searchEle = $("#search_text");
+        if ($searchEle.val().trim() === '') {
+            $searchEle.val('');
+            $searchEle.attr('placeholder', '搜索内容不能为空!');
+            return false;
         }
-        $("#login_modal_form").submit(function (event) {
-            event.preventDefault();
-            $.ajax({
-                url: "{% url 'login_modal' %}",
-                type: 'POST',
-                data: $(this).serialize(),
-                cache: false,
-                success: function (data) {
-                    //console.log(data)
-                    if(data['status']=="SUCCESS"){
-                        window.location.reload();
-                    }else{
-                        $("#login_modal_tip").text(data['msg']);
-                    }
-                },
-                error: function (xhr) {
-                    console.log(xhr)
-                },
-            })
+    });
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 100) {
+            $('#back_top_button').show();
+        } else {
+            $('#back_top_button').hide();
+        }
+    });
+
+    $("#back_top_button").click(function () {
+        $(window).scrollTop(0);
+    });
+
+    $("#login_modal_form").submit(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "{% url 'login_modal' %}",
+            type: 'POST',
+            data: $(this).serialize(),
+            cache: false,
+            success: function (data) {
+                //console.log(data)
+                if (data['status'] == "SUCCESS") {
+                    window.location.reload();
+                } else {
+                    $("#login_modal_tip").text(data['msg']);
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr)
+            },
         })
-    </script>
-    {% block script_extend %}{% endblock %}
+    });
+
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+
+</script>
+{% block script_extend %}{% endblock %}
 </body>
 </html>

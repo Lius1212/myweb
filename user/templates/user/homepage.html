@@ -21,6 +21,7 @@
                                 <p>暂无，敬请期待</p>
                             {% endfor %}
                         </ul>
+                    <div class='homepage-ul-control'><span class="glyphicon glyphicon-triangle-bottom"></span></div>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -30,16 +31,20 @@
                             {% for comment in comments %}
                                 {% if comment.parent %}
                                     {% get_comment_to comment as blog_and_comment %}
-                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}</li>
-                                    <li>{{ comment.content|safe }}</li>
+                                    <li>博客：<a
+                                            href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}
+
+                                    <br>{{ comment.content|safe }}</li>
                                 {% else %}
-                                    <li>博客：{% get_comment_to comment as blog %}<a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
-                                    <li>{{ comment.content|safe }}</li>
+                                    <li>博客：{% get_comment_to comment as blog %}<a
+                                            href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
+                                        <br>{{ comment.content|safe }}</li>
                                 {% endif %}
                             {% empty %}
                                 <p>暂无，敬请期待</p>
                             {% endfor %}
                         </ul>
+                    <div class='homepage-ul-control'><span class="glyphicon glyphicon-triangle-bottom"></span></div>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -49,18 +54,53 @@
                             {% for like in likes %}
                                 {% get_like_to like as blog_and_comment %}
                                 {% if blog_and_comment.0 %}
-                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}</li>
+                                    <li>博客：<a
+                                            href="{% url 'blog_detail' blog_and_comment.0.pk %}">{{ blog_and_comment.0.title }}</a>&nbsp;&nbsp;&nbsp;&nbsp;Comment：{{ blog_and_comment.1.content|striptags }}
+                                    </li>
                                 {% else %}
-                                    <li>博客：<a href="{% url 'blog_detail' blog_and_comment.pk %}">{{ blog_and_comment.title }}</a></li>
+                                    <li>博客：<a
+                                            href="{% url 'blog_detail' blog_and_comment.pk %}">{{ blog_and_comment.title }}</a>
+                                    </li>
                                 {% endif %}
                             {% empty %}
                                 <p>暂无，敬请期待</p>
                             {% endfor %}
                         </ul>
+                    <div class='homepage-ul-control'><span class="glyphicon glyphicon-triangle-bottom"></span></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
-{% block script_extend %}{% endblock %}
+{% block script_extend %}
+    <script type="text/javascript">
+        var liShowNum = 10;
+        $(".homepage-ul").each(function () {
+            //获取每个ul里的li
+            var $liEle = $(this).children();
+            //大于10将多的隐藏
+            if($liEle.length>=liShowNum){
+                for(var i=liShowNum;i<$liEle.length;i++){
+                    $($(this).children()[i]).hide();
+                }
+                //显示下拉按钮
+                $(this).next().show();
+            }
+        })
+
+        $(".homepage-ul-control").on('click',function () {
+            liShowNum += 10;
+            var $liEle = $(this).prev().children();
+            $($(this).prev().children()).show();
+            if($liEle.length>=liShowNum){
+                for(var i=liShowNum;i<$liEle.length;i++){
+                    $($(this).prev().children()[i]).hide();
+                }
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        })
+    </script>
+{% endblock %}

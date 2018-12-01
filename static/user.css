@@ -15,3 +15,7 @@ ul.homepage-ul li{
     border-bottom: #ccc 1px dashed;
     margin-bottom: 1em;
 }
+.homepage-ul-control{
+    text-align:center;
+    display: none;
+}
