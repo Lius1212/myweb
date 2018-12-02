@@ -25,7 +25,7 @@ SECRET_KEY = '9m07cwa8lurllcx4d61w77cp%_r(bz57dtit&d$l^3@t3%dc$j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -170,3 +170,4 @@ CKEDITOR_CONFIGS = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
+AVATAR_UPLOAD_PATH = 'avatar/'

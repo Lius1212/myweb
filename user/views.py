@@ -121,8 +121,9 @@ def change_avatar(request):
 
 
 def upload_avatar(avatar, username):
-    avatar_dir = os.path.join(settings.MEDIA_ROOT, 'avatar', username)      # create avatar file
-    with open(avatar_dir, 'wb') as f:
+    avatar_dir = os.path.join(settings.AVATAR_UPLOAD_PATH, username)   # create avatar file
+    avatar_dir_root = os.path.join(settings.MEDIA_ROOT, avatar_dir)
+    with open(avatar_dir_root, 'wb') as f:
         for chunk in avatar.chunks():
             f.write(chunk)
     return avatar_dir
