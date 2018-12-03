@@ -1,2 +1,2 @@
 # myweb
-python3.7 django2.1.2
+python3.6 django2.1.2

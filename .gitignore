@@ -1,5 +1,4 @@
 db.sqlite3
 media/
-data.json
 data.sql
 static_collected/
