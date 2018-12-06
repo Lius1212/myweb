@@ -25,8 +25,19 @@ def get_blog_list_common(request, blog_all_list):
     paginator = Paginator(blog_all_list, settings.EACH_PAGE_NUMBER)
     page_num = request.GET.get('page', 1)
     page_of_blogs = paginator.get_page(page_num)
-    page_range = paginator.page_range
     blog_dates = Blog.objects.dates('created_time', 'month', order='DESC')
+    current_page_num = page_of_blogs.number
+    page_range = list(range(max(current_page_num - 2, 1),
+                            current_page_num)) + list(range(current_page_num,
+                                                            min(current_page_num + 2, paginator.num_pages) + 1))
+    if page_range[0] - 1 >= 2:
+        page_range.insert(0, '...')
+    if paginator.num_pages - page_range[-1] >= 2:
+        page_range.append('...')
+    if page_range[0] != 1:
+        page_range.insert(0, 1)
+    if page_range[-1] != paginator.num_pages:
+        page_range.append(paginator.num_pages)
     blog_dates_dict = {}
     for blog_date in blog_dates:
         blog_count = Blog.objects.filter(created_time__year=blog_date.year, created_time__month=blog_date.month).count()

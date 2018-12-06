@@ -7,7 +7,7 @@ li{
 }
 div.bs-header{
     background-color: rgb(111, 84, 153);
-    background-image: linear-gradient(rgb(86, 61, 124) 0px, rgb(111, 84, 153) 100%);
+    background-image: linear-gradient(rgb(40, 61, 124) 0px, rgb(111, 84, 153) 100%);
     background-repeat: repeat-x;
     box-sizing: border-box;
     color: rgb(205, 191, 227);
@@ -58,8 +58,12 @@ div.block-title{
     width: 50px;
     background-color: #b9b9b9;
 }
+.home-footer{
+    margin-bottom: 0;
+}
 .home-footer *{
     color:#99979c;
+
 }
 .home-footer a{
     color:#f1f5fa;
