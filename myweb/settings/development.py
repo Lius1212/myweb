@@ -20,7 +20,7 @@ SECRET_KEY = '9m07cwa8lurllcx4d61w77cp%_r(bz57dtit&d$l^3@t3%dc$j'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -39,4 +39,4 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-'''
+

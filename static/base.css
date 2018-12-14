@@ -59,7 +59,7 @@ div.block-title{
     background-color: #b9b9b9;
 }
 .home-footer{
-    margin-bottom: 0;
+    margin-bottom: 0!important;
 }
 .home-footer *{
     color:#99979c;
