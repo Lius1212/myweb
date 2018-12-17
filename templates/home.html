@@ -28,7 +28,7 @@
                         {% for blog in blog_list %}
                             <li><a href="{% url 'blog_detail' blog.id %}">
                                 {{ blog.title }}({{ blog.blog_type }})
-                                {% if blog.get_read_num > 5 %}
+                                {% if blog.get_read_num > 20 %}
                                     <span class="text-danger glyphicon glyphicon-fire"></span>
                                 {% endif %}</a></li>
                         {% endfor %}</ul>

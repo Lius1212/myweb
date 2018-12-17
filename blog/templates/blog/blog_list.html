@@ -19,7 +19,7 @@
                             {% for blog in page_of_blogs %}
                                 <h3>
                                     <a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a>
-                                    {% if blog.get_read_num > 5 %}
+                                    {% if blog.get_read_num > 20 %}
                                         <span class="text-danger glyphicon glyphicon-fire"></span>
                                     {% endif %}
                                 </h3>
