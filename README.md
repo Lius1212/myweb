@@ -1,2 +1,3 @@
 # myweb
-python3.6 django2.1.2
+## Python3.6 Django2.1.2
+https://www.lsblog.top

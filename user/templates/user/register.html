@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}注册{% endblock %}
+{% block head_expends %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'user.css' %}">
+{% endblock %}
 {% block content %}
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
@@ -24,6 +28,7 @@
                         </form>
                     </div>
                 </div>
+                <div class="login_register_tips"><a href="{% url 'login' %}?from={{ request.get_full_path }}" >已有账号，去登录>></a></div>
             {% else %}
                 <span>已登录，跳转到首页...</span>
                 <script type="text/javascript">
