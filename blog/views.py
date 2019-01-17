@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.conf import settings
+from django.contrib.auth.models import User
 from read_record.utils import read_once_time
 from .models import Blog, BlogType
 
@@ -46,6 +47,7 @@ def get_blog_list_common(request, blog_all_list):
     context = {}
     context['blog_all_list'] = blog_all_list
     context['blog_types'] = BlogType.objects.all().annotate(blog_count=Count('blog'))
+    context['blog_authors'] = User.objects.all().annotate(blog_count=Count('blog'))
     context['blog_dates'] = blog_dates_dict
     context['page_of_blogs'] = page_of_blogs
     context['page_range'] = page_range
@@ -64,6 +66,14 @@ def blog_with_type(request, blog_type_pk):
     context = get_blog_list_common(request, blog_all_list)
     context['blog_type'] = blog_type
     return render(request, 'blog/blog_with_type.html', context)
+
+
+def blog_with_author(request, author_pk):
+    author = get_object_or_404(User, pk=author_pk)
+    blog_all_list = Blog.objects.filter(author=author)
+    context = get_blog_list_common(request, blog_all_list)
+    context['author'] = author
+    return render(request, 'blog/blog_with_author.html', context)
 
 
 def blog_with_date(request, year, month):

@@ -69,8 +69,11 @@ class ChangePasswordForm(forms.Form):
     def clean_new_password_again(self):
         new_password = self.cleaned_data['new_password']
         new_password_again = self.cleaned_data['new_password_again']
+        old_password = self.cleaned_data['old_password']
         if new_password != new_password_again:
             raise forms.ValidationError('两次密码输入不一致')
+        elif old_password == new_password:
+            raise forms.ValidationError('新密码与原始密码相同')
         else:
             return new_password_again
 

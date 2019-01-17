@@ -1,0 +1,12 @@
+{% extends 'blog/blog_list.html' %}
+{% load user_tags %}
+{% block list_title %}
+    作者：
+    <a href="{% url 'homepage' author.pk %}">{% if author.profile.nickname %}
+        {{ author.profile.nickname }}
+    {% else %}
+        {{ author }}
+    {% endif %}</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'blog_list' %}">查看全部博客</a>
+{% endblock %}
